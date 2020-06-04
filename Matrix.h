@@ -5,6 +5,7 @@
 #include <vector>
 #include <iostream>
 #include <math.h>
+#include <fstream>
 
 
 class Matrix {
@@ -36,6 +37,10 @@ public:
     // concatenation
     Matrix horizontalConcat(const Matrix &mat) const;
     Matrix verticalConcat(const Matrix &mat) const;
+
+    // class conversion
+    Matrix toClass() const;
+    Matrix toOutput(const int numClasses) const;
 
     // debugging
     void print() const;

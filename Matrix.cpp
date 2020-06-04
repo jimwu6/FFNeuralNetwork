@@ -11,18 +11,6 @@ Matrix::Matrix() {
 Matrix::Matrix(const vector<vector<double>> &newarr) {
     array = newarr;
 }
-
-// Matrix::Matrix(const vector<double> &newarr) {
-//     int sz = 0;
-//     for (int x : newarr) {
-//         if (x > sz) sz = x;
-//     }
-
-//     vector<vector<double>> arr (newarr.size(), vector<double> (sz, 0));
-//     for ()
-
-//     array = newarr;
-// }
  
 // identity matrix
 Matrix Matrix::eye(int n) const {
@@ -34,7 +22,7 @@ Matrix Matrix::eye(int n) const {
     return m;
 }
 
-// tranpose
+// transpose
 Matrix Matrix::transpose() const {
     vector<vector<double>> newarr (array[0].size(), vector<double> (array.size(), 0));
     for (int i = 0; i < array[0].size(); i++) {
@@ -42,7 +30,6 @@ Matrix Matrix::transpose() const {
             newarr[i][j] = array[j][i];
         }
     }
-
 
     Matrix out (newarr);
     return out;
@@ -199,6 +186,31 @@ Matrix Matrix::verticalConcat(const Matrix &mat) const {
     return out;
 }
 
+Matrix Matrix::toClass() const {
+    vector<vector<double>> newarr(array.size(), vector<double> (1, 0));
+    for (int i = 0; i < array.size(); i++) {
+        for (int j = 0; j < array[0].size(); j++) {
+            if (array[i][j] == 1) {
+                newarr[i][0] = j+1;
+                break;
+            }
+        }
+    }
+
+    Matrix out(newarr);
+    return out;
+}
+
+Matrix Matrix::toOutput(const int numClasses) const {
+    vector<vector<double>> newarr(array.size(), vector<double> (numClasses, 0));
+    for (int i = 0; i < array.size(); i++) {
+        newarr[i][array[i][0]-1] = 1;
+    }
+
+    Matrix out(newarr);
+    return out;
+}
+
 void Matrix::print() const {
     for (int i = 0; i < array.size(); i++) {
         for (int j = 0; j < array[0].size(); j++) {
@@ -219,7 +231,15 @@ vector<int> Matrix::size() const {
 }
 
 void Matrix::toFile(string s) const {
-    
+    ofstream output;
+    output.open("./out_data/" + s);
+    for (int i = 0; i < array.size(); i++) {
+        for (int j = 0; j < array[0].size(); j++) {
+            output << array[i][j] << "\t";
+        }
+        output << "\n";
+    }
+    output.close();
 }
 
 Matrix::~Matrix() {
