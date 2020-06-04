@@ -13,6 +13,7 @@ for i in range(len(d)):
 
     # create bounds
     size = len(lines)
+    # assumes a 60/20/20 split for the data
     a = int(size*0.6)
     b = a + int(size*0.2)
 
