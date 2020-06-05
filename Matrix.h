@@ -38,6 +38,9 @@ public:
     Matrix horizontalConcat(const Matrix &mat) const;
     Matrix verticalConcat(const Matrix &mat) const;
 
+    // misc
+    double sumElements(const int times) const;
+
     // class conversion
     Matrix toClass() const;
     Matrix toOutput(const int numClasses) const;

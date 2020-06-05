@@ -186,6 +186,21 @@ Matrix Matrix::verticalConcat(const Matrix &mat) const {
     return out;
 }
 
+double Matrix::sumElements(const int times) const {
+    double sum = 0;
+    for (int i = 0; i < array.size(); i++) {
+        for (int j = 0; j < array[0].size(); j++) {
+            double s = 1;
+            for (int k = 0; k < times; k++) {
+                s *= array[i][j];
+            }
+            sum += s;
+        }
+    }
+    return sum;
+}
+
+
 Matrix Matrix::toClass() const {
     vector<vector<double>> newarr(array.size(), vector<double> (1, 0));
     for (int i = 0; i < array.size(); i++) {
