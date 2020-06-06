@@ -200,13 +200,19 @@ double Matrix::sumElements(const int times) const {
     return sum;
 }
 
-
+// converts :
+// 1 0 0              0
+// 0 1 0              1
+// 0 0 1  --->        2
+// 1 0 0              0
+// 0 0 1              2
 Matrix Matrix::toClass() const {
     vector<vector<double>> newarr(array.size(), vector<double> (1, 0));
     for (int i = 0; i < array.size(); i++) {
         for (int j = 0; j < array[0].size(); j++) {
             if (array[i][j] == 1) {
-                newarr[i][0] = j+1;
+                // change to j+1 if 1-indexed
+                newarr[i][0] = j;
                 break;
             }
         }
@@ -216,10 +222,17 @@ Matrix Matrix::toClass() const {
     return out;
 }
 
+// converts :
+// 0              1 0 0
+// 1              0 1 0
+// 2      --->    0 0 1
+// 0              1 0 0
+// 2              0 0 1
 Matrix Matrix::toOutput(const int numClasses) const {
     vector<vector<double>> newarr(array.size(), vector<double> (numClasses, 0));
     for (int i = 0; i < array.size(); i++) {
-        newarr[i][array[i][0]-1] = 1;
+        // change to array[i][0]-1 if 1-indexed
+        newarr[i][array[i][0]] = 1;
     }
 
     Matrix out(newarr);

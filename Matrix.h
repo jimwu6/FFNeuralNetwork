@@ -39,7 +39,7 @@ public:
     Matrix verticalConcat(const Matrix &mat) const;
 
     // misc
-    double sumElements(const int times) const;
+    double sumElements(const int times) const; // times used for exponent (e.g times = 1 is normal, times = 2 is elementwise squared)
 
     // class conversion
     Matrix toClass() const;
