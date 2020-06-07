@@ -26,10 +26,10 @@ public:
     // basic operations
     Matrix transpose() const;
     Matrix add(const Matrix &newmat) const;
-    Matrix add(int x) const;
+    Matrix add(double x) const;
 
     // multiply
-    Matrix scalarMultiply(int k) const;
+    Matrix scalarMultiply(double k) const;
     Matrix multiply(const Matrix &mat) const;
     Matrix Hadamard(const Matrix &mat) const;
     Matrix Kronecker(const Matrix &mat) const; // only works for product of row and column vector
@@ -39,6 +39,7 @@ public:
     Matrix verticalConcat(const Matrix &mat) const;
 
     // misc
+    double difference(const Matrix &mat) const;
     double sumElements(const int times) const; // times used for exponent (e.g times = 1 is normal, times = 2 is elementwise squared)
 
     // class conversion

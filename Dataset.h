@@ -1,5 +1,7 @@
 #include "SetWrapper.h"
+#include "Activations.h"
 #include <string>
+#include <time.h>
 
 class Dataset {
 
@@ -20,9 +22,12 @@ public:
     void createSet(std::string file_name, std::string set_name);
     
     // NN methods
-    Matrix feedForward(Matrix inputs, Matrix bias, Matrix weights, Matrix &net);
+    Matrix feedForward(Matrix inputs, Matrix weights, Matrix bias, Matrix &net);
     Matrix initializeWeights(double max_weight, int w, int h);
-
+    void evalError(Matrix inputs, Matrix weight, Matrix outputs, Matrix mat_class, Matrix bias, double &error, double &c_error, int samples);
+    void evalErrorSet(SetWrapper set_w, Matrix weights, double &error, double &c_error);
+    Matrix backprop(Matrix inputs, Matrix weights, Matrix outputs, double alpha, Matrix bias);
+    Matrix train(std::vector<std::vector<double>> &errors);
     // destructor
     ~Dataset();
 };

@@ -53,7 +53,7 @@ Matrix Matrix::add(const Matrix &newmat) const {
 }
 
 // add constant value
-Matrix Matrix::add(int x) const {
+Matrix Matrix::add(double x) const {
     vector<vector<double>> newarr = array;
     for (int i = 0; i < array.size(); i++) {
         for (int j = 0; j < array[0].size(); j++) {
@@ -65,7 +65,7 @@ Matrix Matrix::add(int x) const {
     return out;
 }
 
-Matrix Matrix::scalarMultiply(int k) const {
+Matrix Matrix::scalarMultiply(double k) const {
     vector<vector<double>> newarr = array;
     for (int i = 0; i < newarr.size(); i++) {
         for (int j = 0; j < newarr[0].size(); j++) {
@@ -184,6 +184,19 @@ Matrix Matrix::verticalConcat(const Matrix &mat) const {
 
     Matrix out(newarr);
     return out;
+}
+
+double Matrix::difference(const Matrix &mat) const {
+    if (array.size() != mat.array.size() || array[0].size() != mat.array[0].size()) {
+        cout << "Mismatched dims in difference\n";
+    }
+    double d = 0;
+    for (int i = 0; i < array.size(); i++) {
+        for (int j = 0; j < array[0].size(); j++) {
+            if (array[i][j] != mat.array[i][j]) d += 1;
+        }
+    }
+    return d;
 }
 
 double Matrix::sumElements(const int times) const {

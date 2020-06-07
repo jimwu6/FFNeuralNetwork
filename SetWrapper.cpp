@@ -10,7 +10,7 @@ void SetWrapper::read(ifstream &file, int input_count, int output_count) {
     vector<vector<double>> input_array;
     vector<vector<double>> output_array;    
     count = 0;
-
+    
     while (!file.eof()) {
         // get input features
         vector<double> in_array(input_count);
@@ -30,7 +30,6 @@ void SetWrapper::read(ifstream &file, int input_count, int output_count) {
         // increaes the number of examples in this dataset
         count++;
     }
-    
     vector<vector<double>> bias_array (count, vector<double> (1, 1));
 
     inputs = * (new Matrix(input_array));
