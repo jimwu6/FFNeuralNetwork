@@ -26,7 +26,7 @@ public:
     Matrix initializeWeights(double max_weight, int w, int h);
     void evalError(Matrix inputs, Matrix weight, Matrix outputs, Matrix mat_class, Matrix bias, double &error, double &c_error, int samples);
     void evalErrorSet(SetWrapper set_w, Matrix weights, double &error, double &c_error);
-    Matrix backprop(Matrix inputs, Matrix weights, Matrix outputs, double alpha, Matrix bias);
+    void backprop(Matrix inputs, Matrix &weights, Matrix outputs, double alpha, Matrix bias);
     Matrix train(std::vector<std::vector<double>> &errors);
     // destructor
     ~Dataset();

@@ -41,6 +41,7 @@ public:
     // misc
     double difference(const Matrix &mat) const;
     double sumElements(const int times) const; // times used for exponent (e.g times = 1 is normal, times = 2 is elementwise squared)
+    Matrix row(const int ind) const;
 
     // class conversion
     Matrix toClass() const;

@@ -89,10 +89,25 @@ void Dataset::evalErrorSet(SetWrapper set_w, Matrix weights, double &error, doub
     c_error = classes.difference(set_w.classes) / ((double) set_w.count);
 }
 
-Matrix Dataset::backprop(Matrix inputs, Matrix weights, Matrix outputs, double alpha, Matrix bias) {
-    Matrix newWeights = weights;
+void Dataset::backprop(Matrix inputs, Matrix &weights, Matrix outputs, double alpha, Matrix bias) {
+    // int row = (int) rand()/(RAND_MAX+1.)*training_set->count;
+    int row = 4;
+    Matrix sampleInput = inputs.row(row);
+    Matrix sampleOutput = outputs.row(row);
+    Matrix sampleBias = bias.row(row);
 
-    return newWeights;
+    Matrix &net = * (new Matrix());
+    Matrix out = feedForward(sampleInput, weights, sampleBias, net);
+
+    Matrix error_vector = sampleOutput.add(out.scalarMultiply(-1));
+    Matrix delta = error_vector.Hadamard(HyperbolicPrime(net));
+
+    Matrix inputBias = sampleInput.horizontalConcat(sampleBias);
+    Matrix weights_delta = delta.Kronecker(inputBias.transpose());
+    
+    weights_delta = weights_delta.scalarMultiply(alpha);
+    weights = weights.add(weights_delta.transpose());
+    delete &net;
 }
 
 Matrix Dataset::train(vector<vector<double>> &errors) {
@@ -101,13 +116,14 @@ Matrix Dataset::train(vector<vector<double>> &errors) {
     double alpha = 0.1; // learning rate
 
     int epochs = 0;
-    int MAX_EPOCHS = 500;
+    int MAX_EPOCHS = 100;
 
     while (epochs <= MAX_EPOCHS) {
         double e, ce;
         vector<double> errs(6, 0);
-        weights = backprop(training_set->inputs, weights, training_set->outputs, alpha, training_set->bias);
-
+        cout << "epochs: " << epochs << "\n";
+        backprop(training_set->inputs, weights, training_set->outputs, alpha, training_set->bias);
+        cout << "epochs: eval! " << epochs << "\n";
         evalErrorSet(*training_set, weights, errs[0], errs[1]);
         evalErrorSet(*valid_set, weights, errs[2], errs[3]);
         evalErrorSet(*test_set, weights, errs[4], errs[5]);

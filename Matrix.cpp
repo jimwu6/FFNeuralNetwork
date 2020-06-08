@@ -125,16 +125,15 @@ Matrix Matrix::Hadamard(const Matrix &mat) const {
 Matrix Matrix::Kronecker(const Matrix &mat) const {
     if (array.size() != 1 || mat.array[0].size() != 1) {
         cout << "Mismatch dim of Kronecker\n";
+        // Matrix m (vector<vector<double>> ())
     }
-
-    vector<vector<double>> newarr(mat.array.size(), vector<double> (array[0].size(), 0));
-
+    vector<vector<double>> newarr (array[0].size(), vector<double> (mat.array.size(), 0));
     for (int i = 0; i < array[0].size(); i++) {
         for (int j = 0; j < mat.array.size(); j++) {
             newarr[i][j] = array[0][i] * mat.array[j][0];
         }
     }
-
+    
     Matrix out(newarr);
     return out;
 }
@@ -211,6 +210,14 @@ double Matrix::sumElements(const int times) const {
         }
     }
     return sum;
+}
+
+Matrix Matrix::row(const int ind) const {
+    vector<vector<double>> newarr (1);
+    newarr[0] = array[ind];
+    
+    Matrix out(newarr);
+    return out;
 }
 
 // converts :
