@@ -1,0 +1,9 @@
+.vscode
+.idea
+out_data
+test.exe
+data/extra_shuffle
+a.exe
+test.dat
+./data
+data/main_data/

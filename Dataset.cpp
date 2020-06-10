@@ -90,8 +90,8 @@ void Dataset::evalErrorSet(SetWrapper set_w, Matrix weights, double &error, doub
 }
 
 void Dataset::backprop(Matrix inputs, Matrix &weights, Matrix outputs, double alpha, Matrix bias) {
-    // int row = (int) rand()/(RAND_MAX+1.)*training_set->count;
-    int row = 4;
+    int row = (int) rand()/(RAND_MAX+1.)*training_set->count;
+    // int row = 4;
     Matrix sampleInput = inputs.row(row);
     Matrix sampleOutput = outputs.row(row);
     Matrix sampleBias = bias.row(row);
