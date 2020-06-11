@@ -6,4 +6,6 @@ Dataset used is the  [banknote authentication dataset](http://archive.ics.uci.ed
 
 Rough guide of implementation found [here](http://code-spot.co.za/2009/10/08/15-steps-to-implemented-a-neural-net/).
 
+Included is a Jupyter Notebook that uses Tensorflow on the same dataset, achieving almost 100% success rate using 2 layers of a neural network.
+
 
